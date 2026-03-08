@@ -4,10 +4,8 @@ import {
   Post, 
   Body, 
   Param, 
-  Delete, 
-  Put, 
+  Delete,  
   Patch,
-  HttpStatus 
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PostsService } from './posts.service';
@@ -40,6 +38,12 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
+  @Get(':id/comments')
+  @ApiOperation({ summary: 'ดึงโพสต์พร้อมคอมเมนต์' })
+  findPostWithComments(@Param('id') id: string) {
+    return this.postsService.findPostWithComments(id);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'แก้ไขโพสต์บางส่วน' })
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
@@ -51,10 +55,4 @@ export class PostsController {
   remove(@Param('id') id: string) {
     return this.postsService.remove(id);
   }
-
-  @Get(':id/comments')
-  @ApiOperation({ summary: 'ดึงโพสต์พร้อมคอมเมนต์' })
-  findPostWithComments(@Param('id') id: string) {
-    return this.postsService.findPostWithComments(id);
-}
 }

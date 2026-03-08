@@ -1,6 +1,5 @@
-import { IsString, IsNotEmpty, IsInt, MinLength, MaxLength, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, MinLength, MaxLength, IsOptional} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Optional } from '@nestjs/common';
 
 export class UpdateCommentDto {
     @IsOptional()
@@ -13,6 +12,7 @@ export class UpdateCommentDto {
     @IsNotEmpty()
     @MinLength(1)
     message!: string;
+    @MaxLength(100)
 
     @IsOptional()
     @ApiProperty({
@@ -31,4 +31,14 @@ export class UpdateCommentDto {
     @IsString() 
     @IsNotEmpty()
     postId!: number;
+    
+    @IsInt()
+    @IsOptional()
+    @ApiProperty({
+        description: 'The rating given in the comment (1-5)',
+        example: 4,
+        minimum: 1,
+        maximum: 5,
+    })
+    rating?: number;
 }
