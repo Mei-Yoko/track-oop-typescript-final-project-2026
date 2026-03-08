@@ -8,7 +8,7 @@ http://localhost:3000/api
 ## Posts
 
 ### GET /posts
-Get all posts
+Get all posts from memory array
 
 **Response**
 ```
@@ -38,6 +38,38 @@ Get a single post by ID
   "status": "draft | published | archived",
   "createdAt": "string",
   "updatedAt": "string"
+}
+```
+### GET /posts/:id/with-comments
+Retrieve a single post along with all related comments.
+
+**Response**
+```
+{
+  "id": 1,
+  "title": "My First Blog",
+  "content": "Hello NestJS World!",
+  "author": "Winner",
+  "status": "published",
+  "tags": ["tech"],
+  "createdAt": "2026-03-08T10:00:00.000Z",
+  "updatedAt": "2026-03-08T10:00:00.000Z",
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "author": "User A",
+      "content": "Great post!",
+      "createdAt": "2026-03-08T11:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "author": "User B",
+      "content": "Very helpful, thanks!",
+      "createdAt": "2026-03-08T11:30:00.000Z"
+    }
+  ]
 }
 ```
 
