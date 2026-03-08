@@ -51,4 +51,10 @@ export class PostsController {
   remove(@Param('id') id: string) {
     return this.postsService.remove(id);
   }
+
+  @Get(':id/comments')
+  @ApiOperation({ summary: 'ดึงโพสต์พร้อมคอมเมนต์' })
+  findPostWithComments(@Param('id') id: string) {
+    return this.postsService.findPostWithComments(id);
+}
 }
