@@ -1,7 +1,8 @@
-import { IsString, IsNotEmpty, IsInt, MinLength, MaxLength } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCommentDto {
+
   @ApiProperty({
     description: 'The content of the comment',
     example: 'This post is very helpful!',
@@ -9,7 +10,6 @@ export class CreateCommentDto {
   })
   @IsString()
   @IsNotEmpty()
-  @MinLength(1)
   message!: string;
 
   @ApiProperty({
@@ -22,9 +22,10 @@ export class CreateCommentDto {
 
   @ApiProperty({
     description: 'ID of the post this comment belongs to',
-    example: '123e4567-e89b-12d3-a456-426614174000',
+    example: 1
   })
-  @IsString() 
-  @IsNotEmpty()
+  @IsInt()
+  @Min(1)
   postId!: number;
+
 }
