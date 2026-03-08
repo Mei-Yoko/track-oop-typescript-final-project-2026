@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-export class JsonStroage<T extends {id: String} >{
+export class JsonStroage<T extends {id: string} >{
     private filePath: string;
     private data: T[] = [];
 
