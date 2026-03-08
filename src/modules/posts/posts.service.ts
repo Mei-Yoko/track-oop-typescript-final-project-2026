@@ -3,11 +3,14 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostStatus } from '../../common/enums';
 import { Post } from '../../common/interfaces';
+import { CommentsService } from '../comment/comment.service';
 
 @Injectable()
 export class PostsService {
   private posts: Post[] = [];
   private idCounter = 1; 
+
+  constructor(private commentsService: CommentsService) {}
 
   create(createPostDto: CreatePostDto): Post {
     const newPost: Post = {
@@ -55,4 +58,17 @@ export class PostsService {
     this.posts.splice(index, 1);
     return `ลบโพสต์ ID: ${id} เรียบร้อยแล้ว`;
   }
+
+  findPostWithComments(id: string) {
+  const post = this.findOne(id);
+
+  const comments = this.commentsService
+    .findAll()
+    .filter(c => c.postId === post.id);
+
+  return {
+    ...post,
+    comments
+  };
+}
 }
