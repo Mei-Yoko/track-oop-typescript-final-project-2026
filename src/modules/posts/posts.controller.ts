@@ -11,6 +11,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { ParseIntPipe } from '@nestjs/common';
 
 @ApiTags('posts') 
 @Controller('posts')
@@ -52,7 +53,7 @@ export class PostsController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'ลบโพสต์' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.postsService.remove(id);
   }
 }

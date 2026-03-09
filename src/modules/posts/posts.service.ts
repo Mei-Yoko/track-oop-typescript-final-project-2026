@@ -51,7 +51,7 @@ export class PostsService {
     return this.posts[index];
   }
 
-  remove(id: string): string {
+  remove(id: number): string {
     const index = this.posts.findIndex((p) => Number(p.id) === Number(id));
     if (index === -1) throw new NotFoundException('ไม่พบโพสต์ที่ต้องการลบ');
     
